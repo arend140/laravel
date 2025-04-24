@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\KeepinhoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,4 +23,13 @@ Route::get('/soma/{valor1}/{valor2}', function ($valor1, $valor2){
 });
 
 //Cálculos
-Route::get('/calc/somar/{x}/{y}', [CalculosController::class, 'soma']);
+Route::get('/calc/somar/{x}/{y}', [CalculosController::class, 'somar']);
+Route::get('/calc/subtrair/{x}/{y}', [CalculosController::class, 'subtrair']);
+
+//Criar a rota e a função na controller para o "quadrado" -> Elevar um único número ao quadrado
+Route::get('/calc/quadrado/{x}', [CalculosController::class, 'quadrado']);
+
+//Keepinho
+Route::prefix('/keep')->group(function () {
+    Route::get('/', [KeepinhoController::class,'index']);
+});
