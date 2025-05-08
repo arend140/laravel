@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,5 +41,17 @@ Route::prefix('/keep')->group(function () {
     Route::put('/editar', [KeepinhoController::class, 'editar'])->name('keep.editarGravar'); //Ação
 
     Route::delete('/apagar/{nota}', [KeepinhoController::class, 'apagar'])->name('keep.apagar');
+
+});
+
+Route::prefix('/clientes')->group(function () {
+    Route::get('/', [ClientesController::class,'index'])->name('clientes');
+
+    Route::post('/gravar', [ClientesController::class,'gravar'])->name('clientes.gravar');
+
+    Route::get('/editar/{cliente}', [ClientesController::class,'editar'])->name('clientes.editar');
+
+    Route::put('/editar', [ClientesController::class,'editar'])->name('clientes.editarGravar');
+
 
 });
