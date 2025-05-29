@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\AutenticaController;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-    //echo "oi";
 });
 
 Route::get('/teste', function () {
@@ -57,14 +56,16 @@ Route::prefix('/clientes')->group(function () {
     Route::get('/editar/{cliente}', [ClientesController::class,'editar'])->name('clientes.editar');
 
     Route::put('/editar', [ClientesController::class,'editar'])->name('clientes.editarGravar');
-
-
 });
 
-Route::get('/autenticar', [AutenticaController::class, 'index'])->name('autentica');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/autenticar/gravar', [AutenticaController::class, 'gravar'])->name('autentica.gravar');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/autenticar/login', [AutenticaController::class, 'login'])->name('autentica.login');
-Route::post('/autenticar/login', [AutenticaController::class, 'login']);
-
+require __DIR__.'/auth.php';
