@@ -13,6 +13,19 @@
                        + Produto
                     </x-link-button>
                 </div>
+                
+                <div class="flex flex-col">
+                    @foreach ($produtos as $produto)
+                        <div class="flex flex-col justify-between border border-black ">
+                            <span>{{ $produto->nome }}</span>
+                            <span>{{ $produto->preco }}</span>
+                            <span>{{ $produto->descricao }}</span>
+                            @if ($produto->imagem) 
+                                <img src="{{ asset('storage/' . $produto->imagem) }}" alt="imagem" style="max-height:80px; width:150px;">
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

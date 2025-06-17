@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <form method="POST" action="{{ route('produtos.store') }}">
+                    <form method="POST" action="{{ route('produtos.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Nome -->
@@ -29,6 +29,10 @@
                             <x-textarea id="descricao" class="block mt-1 w-full" name="descricao"
                                 required autofocus autocomplete="descricao"> {{ old('descricao') }}</x-textarea>
                             <x-input-error :messages="$errors->get('descricao')" class="mt-2" />
+
+                            <x-input-label for="imagem" :value="__('Imagem')" />
+                            <x-image-input id="imagem" name="imagem" class="mt-2" :value="old('imagem')" />
+                            <x-input-error :messages="$errors->get('imagem')" class="mt-2" />
                         </div>
 
                         <x-primary-button class="m-5">Gravar produto</x-primary-button>
