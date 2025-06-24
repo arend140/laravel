@@ -23,6 +23,7 @@
                             @if ($produto->imagem) 
                                 <img src="{{ asset('storage/' . $produto->imagem) }}" alt="imagem" style="max-height:80px; width:150px;">
                             @endif
+                            <x-nav-link href="{{ route('carrinho.adicionar', $produto->id) }}">Adicionar ao carrinho</x-nav-link>
                         </div>
                     @endforeach
                 </div>

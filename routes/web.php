@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProdutosController;
@@ -70,5 +71,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('produtos', ProdutosController::class);
+
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho');
+Route::get('/carrinho/adicionar/{produto}', [CarrinhoController::class, 'store'])->name('carrinho.adicionar');
+Route::get('/carrinho/apagar/{produto}', [CarrinhoController::class, 'delete'])->name('carrinho.apagar');
+
 
 require __DIR__.'/auth.php';
