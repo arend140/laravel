@@ -33,6 +33,13 @@
                             <x-input-label for="imagem" :value="__('Imagem')" />
                             <x-image-input id="imagem" name="imagem" class="mt-2" :value="old('imagem')" />
                             <x-input-error :messages="$errors->get('imagem')" class="mt-2" />
+
+                            <x-input-label for="categoria" :value="__('Categoria')" />
+                            <select name="categoria" id="categoria">
+                                @foreach ($categorias as $categoria)
+                                    <option>{{ $categoria->nome }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <x-primary-button class="m-5">Gravar produto</x-primary-button>
