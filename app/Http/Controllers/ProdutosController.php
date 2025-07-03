@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Produto;
+use App\Models\ProdutoCategoria;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -12,7 +13,8 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::with('categoria')->get();
+        
         return view('produtos.index', [
             'produtos' => $produtos,
         ]);
@@ -33,20 +35,25 @@ class ProdutosController extends Controller
     public function store(Request $request)
     {
         $request->validate(['imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048']);
+        $produto = null;
 
         if($request->hasFile('imagem')){
             $imagem = $request->file('imagem');
             $caminhoImagem = $imagem->store('produtos', 'public');
 
-            Produto::create([
+            $produto = Produto::create([
                 'nome'=> $request->nome,
                 'preco'=> $request->preco,
                 'descricao'=> $request->descricao,
                 'imagem'=> $caminhoImagem,
             ]);
         }else{
-            Produto::create($request->all());
+            $produto = Produto::create($request->all());
         }
+
+        $produto->categoria()->attach([$request->categoria]);
+        //['produto_id'=>Produto::get()->last()->id, 'categoria_id'=>$request->categoria]
+
         return redirect()->route('produtos.index');
     }
 

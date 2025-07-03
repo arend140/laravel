@@ -20,6 +20,7 @@
                             <span>{{ $produto->nome }}</span>
                             <span>{{ $produto->preco }}</span>
                             <span>{{ $produto->descricao }}</span>
+                            <span>Categoria:{{ $produto->categoria[0]->nome }}</span>
                             @if ($produto->imagem) 
                                 <img src="{{ asset('storage/' . $produto->imagem) }}" alt="imagem" style="max-height:80px; width:150px;">
                             @endif
