@@ -22,5 +22,17 @@ class CategorySeeder extends Seeder
         Category::Create([
             'name'=>'Lazer'
         ]);
+        Category::Create([
+            'name'=>'Esportes'
+        ]);
+        Category::Create([
+            'name'=>'Política'
+        ]);
+        Category::Create([
+            'name'=>'Alimentação'
+        ]);
+        Category::Create([
+            'name'=>'Pokémon'
+        ]);
     }
 }
