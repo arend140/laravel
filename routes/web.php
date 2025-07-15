@@ -3,8 +3,10 @@
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -80,5 +82,13 @@ Route::get('/carrinho/apagar/{produto}', [CarrinhoController::class, 'delete'])-
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias');
 Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categoria.create');
 Route::post('/categorias/store', [CategoriaController::class, 'store'])->name('categoria.store');
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
+Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/category/posts/{category_id}', [CategoryController::class, 'posts'])->name('category.posts');
 
 require __DIR__.'/auth.php';
